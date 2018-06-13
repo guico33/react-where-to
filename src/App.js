@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { hot } from 'react-hot-loader'
+import { getNews } from './api'
 
 import './styles.less'
 
 class App extends Component {
+  componentDidMount() {
+    getNews('se').then(res => console.log(res))
+  }
   state = {
     message: 'hello',
   }

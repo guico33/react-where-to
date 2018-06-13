@@ -2,12 +2,18 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
+const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
   devServer: {
     historyApiFallback: true,
     hot: true,
+  },
+  resolve: {
+    alias: {
+      "@config": path.resolve(__dirname, './src/config')
+    }
   },
   module: {
     rules: [
