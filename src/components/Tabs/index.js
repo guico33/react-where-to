@@ -5,10 +5,10 @@ class Tabs extends Component {
     render({ isActive, handleClick })
 
   render() {
-    const { children, active, onTabClick, className } = this.props
+    const { children, active, onTabClick, ...rest } = this.props
     return (
       <Fragment>
-        <div className={className}>
+        <div {...rest}>
           {React.Children.map(children, (tab, i) =>
             React.cloneElement(tab, {
               isActive: i === active,
