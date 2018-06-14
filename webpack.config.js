@@ -1,8 +1,7 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   entry: './src/index.js',
@@ -12,8 +11,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "@config": path.resolve(__dirname, './src/config')
-    }
+      '@config': path.resolve(__dirname, './src/config'),
+    },
   },
   module: {
     rules: [
@@ -34,12 +33,18 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader'],
+        test: /\.(less|css)$/,
+        use: [
+          { loader: 'style-loader' },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]--[hash:base64:5]',
+            },
+          },
+          { loader: 'less-loader' },
+        ],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -62,7 +67,6 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
     }),
-    new ExtractTextPlugin('styles.css'),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
